@@ -33,8 +33,8 @@ services:
         ports:
             - 8000:80
         environment:
-            MYSQL_USER: user
-            MYSQL_PASSWORD: test
-            MYSQL_ROOT_PASSWORD: test 
+            MYSQL_USER: administrator
+            MYSQL_PASSWORD: admin123
+            MYSQL_ROOT_PASSWORD: root1234 
 volumes:
     persistent:
