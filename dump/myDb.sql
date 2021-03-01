@@ -111,9 +111,6 @@ ALTER TABLE `users`
 --
 -- AUTO_INCREMENT per la taula `administradors`
 --
-ALTER TABLE `administradors`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
 --
 -- AUTO_INCREMENT per la taula `classes`
 --

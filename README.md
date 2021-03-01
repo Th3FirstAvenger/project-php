@@ -6,7 +6,7 @@
   * [Build this project](#build-this-project)
 
 # Documentation for PHP Project 
-**Group Members:** Ernest, Irene, Isaac and Marc 
+**Group Members:** Ernest, Irena, Isaac and Marc 
 
 We are using bootstrap template and we change it to php for make that project.
 
@@ -262,7 +262,7 @@ head('Register'); // Function put defaul header and assing title Register
         - :heavy_check_mark: [docker-compose](https://docs.docker.com/compose/install/)
 
 ```bash
-git clone https://github.com/Th3FirstAvenger/docker-lamp.git project-php --recursive
+git clone https://github.com/Th3FirstAvenger/project-php.git project-php --recursive
 cd project-php
 docker-compose up -d
 ```
