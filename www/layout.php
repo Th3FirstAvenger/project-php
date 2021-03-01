@@ -68,7 +68,7 @@ function head($title = ''){
       <div class="container">
         <div class="d-flex align-items-center">
           <div class="site-logo">
-            <a href="index.html" class="d-block">
+            <a href="index.php" class="d-block">
               <img src="images/logo.jpg" alt="Image" class="img-fluid">
             </a>
           </div>
@@ -89,7 +89,7 @@ function head($title = ''){
                   <a href="admissions.html" class="nav-link text-left">Admissions</a>
                 </li>
                 <li>
-                  <a href="courses.html" class="nav-link text-left">Courses</a>
+                  <a href="courses.php" class="nav-link text-left">Courses</a>
                 </li>
                 <li>
                     <a href="contact.html" class="nav-link text-left">Contact</a>

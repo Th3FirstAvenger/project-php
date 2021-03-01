@@ -76,11 +76,31 @@ if (isset($_POST['login_user'])) {
   	  $_SESSION['username'] = $username;
   	  $_SESSION['success'] = "You are now logged in";
   	  header('location: index.php');
-  	}else {
+  	}else{
   		array_push($errors, "Wrong username/password combination");
   	}
   }
 }
 
+// Searching courses
+
+if (isset($_REQUESTS['search'])) {
+	if (isset($_REQUEST['assignatura'])){
+
+		$assign = $_REQUESTS['assignatura'];
+		$query = "SELECT id, assignatura, categoria FROM classes where assignatura = '$assign'"
+	elseif(isset($_REQUEST['categoria'])){
+
+		$cate = $_REQUESTS['categoria'];
+		$query = "SELECT id, assignatura, categoria FROM classes where categoria = '$cate'"
+
+	}else{
+	
+  		array_push($errors, "Petición no permitida...");
+	}
+
+  	$results = mysqli_query($db, $query);
+	
+}
 ?>
 
