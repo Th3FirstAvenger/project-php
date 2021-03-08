@@ -17,6 +17,18 @@ head('Courses')?>
         <a href="index.html">Home</a>
         <span class="mx-3 icon-keyboard_arrow_right"></span>
         <span class="current">Courses</span>
+	
+	<form method="post">
+	    <table width="200" border="1">
+	  <tr>
+	    <td>search</td>
+	    <td><input type="text" name="name" value="<?php echo $search;?>" /></td>
+	    <td>Email</td>
+	    <td><input type="text" name="email" value="<?php echo $email;?>" /></td>
+	    <td><input type="submit" name="submit" value=" Find " /></td>
+	  </tr>
+	</table>
+	</form>
       </div>
     </div>
 

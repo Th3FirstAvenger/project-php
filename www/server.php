@@ -4,7 +4,7 @@ session_start();
 // initializing variables
 $username = "";
 $email    = "";
-$errors = array(); 
+$errors   = array(); 
 
 // connect to the database
 $db = mysqli_connect('db', 'administrator', 'admin123', 'elearning');
@@ -19,13 +19,12 @@ if (isset($_POST['reg_user'])) {
   $permissions = mysqli_real_escape_string($db,$_POST['permissions']);
 
   // form validation: ensure that the form is correctly filled ...
-  // by adding (array_push()) corresponding error unto $errors array
+  // if there is any error it will be added to errors array with a code
   if (empty($username)) { array_push($errors, "Username is required"); }
   if (empty($email)) { array_push($errors, "Email is required"); }
+  if (!filter_var($email, FILTER_VALIDATE_EMAIL)) { array_push($errors, "No email format"); }
   if (empty($password_1)) { array_push($errors, "Password is required"); }
-  if ($password_1 != $password_2) {
-	array_push($errors, "The two passwords do not match");
-  }
+  if ($password_1 != $password_2) { array_push($errors, "Passwords do not match"); }
 
   // first check the database to make sure 
   // a user does not already exist with the same username and/or email
@@ -34,13 +33,8 @@ if (isset($_POST['reg_user'])) {
   $user = mysqli_fetch_assoc($result);
   
   if ($user) { // if user exists
-    if ($user['username'] === $username) {
-      array_push($errors, "Username already exists");
-    }
-
-    if ($user['email'] === $email) {
-      array_push($errors, "email already exists");
-    }
+    if ($user['username'] === $username) { array_push($errors, "This username already exists"); }
+    if ($user['email'] === $email) { array_push($errors, "This email already exists"); }
   }
 
   // Finally, register user if there are no errors in the form
@@ -53,6 +47,9 @@ if (isset($_POST['reg_user'])) {
   	$_SESSION['username'] = $username;
   	$_SESSION['success'] = "You are now logged in";
   	header('location: index.php');
+  } else {
+    // If there is any error a JS code will append a new tag to the form to display the error
+	  echo sprintf("<script>alert('%s');</script>",$errors[0]);	
   }
 }
 
@@ -61,12 +58,8 @@ if (isset($_POST['login_user'])) {
   $username = mysqli_real_escape_string($db, $_POST['username']);
   $password = mysqli_real_escape_string($db, $_POST['pword']);
 
-  if (empty($username)) {
-  	array_push($errors, "Username or email is required");
-  }
-  if (empty($password)) {
-  	array_push($errors, "Password is required");
-  }
+  if (empty($username)) { array_push($errors, "Username or email required"); }
+  if (empty($password)) { array_push($errors, "Password required"); }
 
   if (count($errors) == 0) {
   	$password = md5($password);
@@ -76,8 +69,8 @@ if (isset($_POST['login_user'])) {
   	  $_SESSION['username'] = $username;
   	  $_SESSION['success'] = "You are now logged in";
   	  header('location: index.php');
-  	}else{
-  		array_push($errors, "Wrong username/password combination");
+  	} else {
+		array_push($errors, "Wrong username or password");
   	}
   }
 }
@@ -85,22 +78,20 @@ if (isset($_POST['login_user'])) {
 // Searching courses
 
 if (isset($_REQUESTS['search'])) {
-	if (isset($_REQUEST['assignatura'])){
+	if (isset($_REQUEST['assignatura'])) {
 
 		$assign = $_REQUESTS['assignatura'];
-		$query = "SELECT id, assignatura, categoria FROM classes where assignatura = '$assign'"
-	elseif(isset($_REQUEST['categoria'])){
+		$query = "SELECT id, assignatura, categoria FROM classes where assignatura = '$assign'";
+	}elseif(isset($_REQUEST['categoria'])) {
 
 		$cate = $_REQUESTS['categoria'];
-		$query = "SELECT id, assignatura, categoria FROM classes where categoria = '$cate'"
+		$query = "SELECT id, assignatura, categoria FROM classes where categoria = '$cate'";
 
-	}else{
-	
-  		array_push($errors, "Petición no permitida...");
+	} else {
+    		array_push($errors, "You can not perform this action");
 	}
 
   	$results = mysqli_query($db, $query);
 	
 }
 ?>
-
