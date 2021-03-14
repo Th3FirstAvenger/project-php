@@ -37,7 +37,7 @@ head('Elearning')?>
             </div>
           </div>
           <div class="input-field second-wrap">
-            <input id="search" type="text" name="search" placeholder="Enter Keywords?" />
+            <input id="search" type="text" name="search" placeholder="Search something... " />
           </div>
           <div class="input-field third-wrap">
             <button class="btn-search" type="submit" name="submit" >

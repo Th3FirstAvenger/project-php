@@ -50,7 +50,7 @@ CREATE TABLE `classes` (
   `id` int NOT NULL,
   `assignatura` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `categoria` varchar(50) NOT NULL,
-  `descripcio` varchar(200) NOT NULL,
+  `descripcio` varchar(500) NOT NULL,
   `preu` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
