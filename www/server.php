@@ -69,11 +69,9 @@ if (isset($_POST['login_user'])) {
     if (mysqli_num_rows($results) == 1) {
       $que_perm = "SELECT permissions FROM users WHERE username='$username' OR email='$username'"; ## REVISAR
       $r_perm = mysqli_query($db, $que_perm); ## REVISAR
-      $perm = mysqli_fetch_array($r_perm,0); ## REVISAR
-
   	  $_SESSION['username'] = $username;
   	  $_SESSION['success'] = "You are now logged in";
-      $_SESSION['permissions'] = $perm; ## REVISAR 
+      $_SESSION['permissions'] = $r_perm; ## REVISAR 
       header('location: index.php');
   } else {
     // If there is any error a JS code will append a new tag to the form to display the error
@@ -85,21 +83,19 @@ if (isset($_POST['login_user'])) {
 
 // Searching courses
 
-if (isset($_REQUESTS['search'])) {
-	if (isset($_REQUEST['assignatura'])) {
+if (isset($_GET['submit'])) {
+  if (!empty($_GET['search'])) {
+    $search = mysqli_real_escape_string($db, $_GET['search']);
+    $opt = $_GET['options'];
+    if ($opt != "all"){
+      $sql = "SELECT id, assignatura, categoria, preu, descripcio FROM classes where $opt like UPPER('$search')";
+    }else{
+      $sql = "SELECT id, assignatura, categoria, preu, descripcio FROM classes where assignatura like UPPER('$search') OR categoria like UPPER('$search') OR preu like UPPER('$search') OR descripcio like UPPER('%$search%')";
+    }
+  }
+}else{
+      $sql = "SELECT id, assignatura, categoria, preu, descripcio FROM classes";
+    }
+  $search_results = mysqli_query($db, $sql);
 
-		$assign = $_REQUESTS['assignatura'];
-		$query = "SELECT id, assignatura, categoria FROM classes where assignatura = '$assign'";
-	}elseif(isset($_REQUEST['categoria'])) {
-
-		$cate = $_REQUESTS['categoria'];
-		$query = "SELECT id, assignatura, categoria FROM classes where categoria = '$cate'";
-
-	} else {
-    		array_push($errors, "You can not perform this action");
-	}
-
-  	$results = mysqli_query($db, $query);
-	
-}
 ?>

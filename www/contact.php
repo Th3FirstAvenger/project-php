@@ -1,4 +1,4 @@
-   <? include('layout.php');
+<?php include('layout.php');
 include('server.php');
 head('Contact')?>
  
@@ -12,7 +12,6 @@ head('Contact')?>
           </div>
         </div>
       </div> 
-    
 
     <div class="custom-breadcrumns border-bottom">
       <div class="container">

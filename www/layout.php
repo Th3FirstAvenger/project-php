@@ -29,6 +29,7 @@ function head($title = ''){
   <link href="css/jquery.mb.YTPlayer.min.css" media="all" rel="stylesheet" type="text/css">
 
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/main.css">
 
 
 
@@ -85,8 +86,10 @@ echo '<a href="logout.php" class="small mr-3"><span class="icon-unlock-alt"></sp
                 <li>
                   <a href="index.php" class="nav-link text-left">Home</a>
                 </li>
-                <li class="has-children">
-                  <a href="about.html" class="nav-link text-left">About Us</a>
+';
+    if (!isset($_SESSION['permissions'] )){ ## REVISAR
+               echo' <li class="has-children">
+                  <a href="about.php" class="nav-link text-left">About Us</a>
                   <ul class="dropdown">
                     <li><a href="teachers.php">Our Teachers</a></li>
                     <li><a href="about.php">Our School</a></li>
@@ -97,9 +100,9 @@ echo '<a href="logout.php" class="small mr-3"><span class="icon-unlock-alt"></sp
                   <a href="admissions.php" class="nav-link text-left">Admissions</a>
                 
                 </li>';
-          if (isset($_SESSION['permissions'] )){ ## REVISAR
-                echo '<li>
-                  <a href="courses.php" class="nav-link text-left">';echo 'Courses</a>
+    }else{
+      echo '<li>
+                  <a href="courses.php" class="nav-link text-left">';echo $r_perm;echo ' Courses</a>
                   </li>
 ';
           }
