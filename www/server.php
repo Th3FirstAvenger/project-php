@@ -46,7 +46,8 @@ if (isset($_POST['reg_user'])) {
   	mysqli_query($db, $query);
   	$_SESSION['username'] = $username;
   	$_SESSION['success'] = "You are now logged in";
-  	header('location: index.php');
+    $_SESSION['permissions'] = $permissions; 
+    header('location: index.php');
   } else {
     // If there is any error a JS code will append a new tag to the form to display the error
 	  echo sprintf("<script>alert('%s');</script>",$errors[0]);	
@@ -57,7 +58,7 @@ if (isset($_POST['reg_user'])) {
 if (isset($_POST['login_user'])) {
   $username = mysqli_real_escape_string($db, $_POST['username']);
   $password = mysqli_real_escape_string($db, $_POST['pword']);
-
+  
   if (empty($username)) { array_push($errors, "Username or email required"); }
   if (empty($password)) { array_push($errors, "Password required"); }
 
@@ -65,15 +66,22 @@ if (isset($_POST['login_user'])) {
   	$password = md5($password);
   	$query = "SELECT * FROM users WHERE (username='$username' OR email='$username') AND password='$password'";
   	$results = mysqli_query($db, $query);
-  	if (mysqli_num_rows($results) == 1) {
+    if (mysqli_num_rows($results) == 1) {
+      $que_perm = "SELECT permissions FROM users WHERE username='$username' OR email='$username'"; ## REVISAR
+      $r_perm = mysqli_query($db, $que_perm); ## REVISAR
+      $perm = mysqli_fetch_array($r_perm,0); ## REVISAR
+
   	  $_SESSION['username'] = $username;
   	  $_SESSION['success'] = "You are now logged in";
-  	  header('location: index.php');
-  	} else {
-		array_push($errors, "Wrong username or password");
-  	}
+      $_SESSION['permissions'] = $perm; ## REVISAR 
+      header('location: index.php');
+  } else {
+    // If there is any error a JS code will append a new tag to the form to display the error
+	  echo sprintf("<script>alert('%s');</script>",$errors[0]);	
+  }
   }
 }
+
 
 // Searching courses
 

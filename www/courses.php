@@ -1,5 +1,7 @@
-<?php include('layout.php');
-head('Courses')?>
+<? include('layout.php');
+include('server.php');
+head('Elearning')?>
+    
     <div class="site-section ftco-subscribe-1 site-blocks-cover pb-4" style="background-image: url('images/bg_1.jpg')">
         <div class="container">
           <div class="row align-items-end">
@@ -17,38 +19,21 @@ head('Courses')?>
         <a href="index.html">Home</a>
         <span class="mx-3 icon-keyboard_arrow_right"></span>
         <span class="current">Courses</span>
-	
-	<form method="post">
-	    <table width="200" border="1">
-	  <tr>
-	    <td>search</td>
-	    <td><input type="text" name="name" value="<?php echo $search;?>" /></td>
-	    <td>Email</td>
-	    <td><input type="text" name="email" value="<?php echo $email;?>" /></td>
-	    <td><input type="submit" name="submit" value=" Find " /></td>
-	  </tr>
-	</table>
-	</form>
       </div>
     </div>
 
-<?php 
-	if ($result-> num_rows > 0) {
-  	// output data of each row
-  while($row = $result->fetch_assoc()) {
-	  echo '
     <div class="site-section">
         <div class="container">
             <div class="row">
                 <div class="col-lg-4 col-md-6 mb-4">
                     <div class="course-1-item">
                         <figure class="thumnail">
-                                <a href="course-single.html"><img src="images/course_'.$row['id'].'.jpg" alt="Image" class="img-fluid"></a>
-                        <div class="price">$'.$row["preu"].'</div>
-                        <div class="category"><h3>'.$row["assignatura"].'</h3></div>  
+                        <a href="course-single.html"><img src="images/course_1.jpg" alt="Image" class="img-fluid"></a>
+                        <div class="price">$99.00</div>
+                        <div class="category"><h3>Mobile Application</h3></div>  
                         </figure>
                         <div class="course-1-content pb-4">
-                        <h2>'.$row["categoria"].'</h2>
+                        <h2>How To Create Mobile Apps Using Ionic</h2>
                         <div class="rating text-center mb-3">
                             <span class="icon-star2 text-warning"></span>
                             <span class="icon-star2 text-warning"></span>
@@ -56,20 +41,126 @@ head('Courses')?>
                             <span class="icon-star2 text-warning"></span>
                             <span class="icon-star2 text-warning"></span>
                         </div>
-                        <p class="desc mb-4">'.$row["descripcio"].'</p>
+                        <p class="desc mb-4">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Similique accusantium ipsam.</p>
                         <p><a href="course-single.html" class="btn btn-primary rounded-0 px-4">Enroll In This Course</a></p>
                         </div>
                     </div>
                 </div>
+
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="course-1-item">
+                        <figure class="thumnail">
+                                <a href="course-single.html"><img src="images/course_2.jpg" alt="Image" class="img-fluid"></a>
+                        <div class="price">$99.00</div>
+                        <div class="category"><h3>Mobile Application</h3></div>  
+                        </figure>
+                        <div class="course-1-content pb-4">
+                        <h2>How To Create Mobile Apps Using Ionic</h2>
+                        <div class="rating text-center mb-3">
+                            <span class="icon-star2 text-warning"></span>
+                            <span class="icon-star2 text-warning"></span>
+                            <span class="icon-star2 text-warning"></span>
+                            <span class="icon-star2 text-warning"></span>
+                            <span class="icon-star2 text-warning"></span>
+                        </div>
+                        <p class="desc mb-4">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Similique accusantium ipsam.</p>
+                        <p><a href="course-single.html" class="btn btn-primary rounded-0 px-4">Enroll In This Course</a></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="course-1-item">
+                        <figure class="thumnail">
+                                <a href="course-single.html"><img src="images/course_3.jpg" alt="Image" class="img-fluid"></a>
+                        <div class="price">$99.00</div>
+                        <div class="category"><h3>Mobile Application</h3></div>  
+                        </figure>
+                        <div class="course-1-content pb-4">
+                        <h2>How To Create Mobile Apps Using Ionic</h2>
+                        <div class="rating text-center mb-3">
+                            <span class="icon-star2 text-warning"></span>
+                            <span class="icon-star2 text-warning"></span>
+                            <span class="icon-star2 text-warning"></span>
+                            <span class="icon-star2 text-warning"></span>
+                            <span class="icon-star2 text-warning"></span>
+                        </div>
+                        <p class="desc mb-4">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Similique accusantium ipsam.</p>
+                        <p><a href="course-single.html" class="btn btn-primary rounded-0 px-4">Enroll In This Course</a></p>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="course-1-item">
+                        <figure class="thumnail">
+                                <a href="course-single.html"><img src="images/course_4.jpg" alt="Image" class="img-fluid"></a>
+                        <div class="price">$99.00</div>
+                        <div class="category"><h3>Mobile Application</h3></div>  
+                        </figure>
+                        <div class="course-1-content pb-4">
+                        <h2>How To Create Mobile Apps Using Ionic</h2>
+                        <div class="rating text-center mb-3">
+                            <span class="icon-star2 text-warning"></span>
+                            <span class="icon-star2 text-warning"></span>
+                            <span class="icon-star2 text-warning"></span>
+                            <span class="icon-star2 text-warning"></span>
+                            <span class="icon-star2 text-warning"></span>
+                        </div>
+                        <p class="desc mb-4">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Similique accusantium ipsam.</p>
+                        <p><a href="course-single.html" class="btn btn-primary rounded-0 px-4">Enroll In This Course</a></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="course-1-item">
+                        <figure class="thumnail">
+                                <a href="course-single.html"><img src="images/course_5.jpg" alt="Image" class="img-fluid"></a>
+                        <div class="price">$99.00</div>
+                        <div class="category"><h3>Mobile Application</h3></div>  
+                        </figure>
+                        <div class="course-1-content pb-4">
+                        <h2>How To Create Mobile Apps Using Ionic</h2>
+                        <div class="rating text-center mb-3">
+                            <span class="icon-star2 text-warning"></span>
+                            <span class="icon-star2 text-warning"></span>
+                            <span class="icon-star2 text-warning"></span>
+                            <span class="icon-star2 text-warning"></span>
+                            <span class="icon-star2 text-warning"></span>
+                        </div>
+                        <p class="desc mb-4">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Similique accusantium ipsam.</p>
+                        <p><a href="course-single.html" class="btn btn-primary rounded-0 px-4">Enroll In This Course</a></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="course-1-item">
+                        <figure class="thumnail">
+                                <a href="course-single.html"><img src="images/course_6.jpg" alt="Image" class="img-fluid"></a>
+                        <div class="price">$99.00</div>
+                        <div class="category"><h3>Mobile Application</h3></div>  
+                        </figure>
+                        <div class="course-1-content pb-4">
+                        <h2>How To Create Mobile Apps Using Ionic</h2>
+                        <div class="rating text-center mb-3">
+                            <span class="icon-star2 text-warning"></span>
+                            <span class="icon-star2 text-warning"></span>
+                            <span class="icon-star2 text-warning"></span>
+                            <span class="icon-star2 text-warning"></span>
+                            <span class="icon-star2 text-warning"></span>
+                        </div>
+                        <p class="desc mb-4">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Similique accusantium ipsam.</p>
+                        <p><a href="course-single.html" class="btn btn-primary rounded-0 px-4">Enroll In This Course</a></p>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
-';
-  }
-} else {
-  echo "0 results";
-}
-?>
 
     <div class="section-bg style-1" style="background-image: url('images/hero_1.jpg');">
         <div class="container">
@@ -94,5 +185,4 @@ head('Courses')?>
           </div>
         </div>
       </div>
-      
-<?php foot() ?>
+<?php foot();?>

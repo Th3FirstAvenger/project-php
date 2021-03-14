@@ -56,10 +56,17 @@ function head($title = ''){
 	    <a href="#" class="small mr-3"><span class="icon-phone2 mr-2"></span> 10 20 123 456</a> 
 	    <a href="#" class="small mr-3"><span class="icon-envelope-o mr-2"></span> elearning@itb.cat</a> 
 	  </div>
-	  <div class="col-lg-3 text-right">
+    <div class="col-lg-3 text-right">';
+  if (isset($_SESSION['username'])){
+
+echo '<a href="logout.php" class="small mr-3"><span class="icon-unlock-alt"></span> log out</a>';
+  } else {
+    echo '
 	    <a href="login.php" class="small mr-3"><span class="icon-unlock-alt"></span> Log In</a>
 	    <a href="register.php" class="small btn btn-primary px-4 py-2 rounded-0"><span class="icon-users"></span> Register</a>
-	  </div>
+';
+  } 
+    echo'</div>
 	</div>
       </div>
     </div>
@@ -81,25 +88,34 @@ function head($title = ''){
                 <li class="has-children">
                   <a href="about.html" class="nav-link text-left">About Us</a>
                   <ul class="dropdown">
-                    <li><a href="teachers.html">Our Teachers</a></li>
-                    <li><a href="about.html">Our School</a></li>
+                    <li><a href="teachers.php">Our Teachers</a></li>
+                    <li><a href="about.php">Our School</a></li>
                   </ul>
                 </li>
+                
                 <li>
-                  <a href="admissions.html" class="nav-link text-left">Admissions</a>
-                </li>
+                  <a href="admissions.php" class="nav-link text-left">Admissions</a>
+                
+                </li>';
+          if (isset($_SESSION['permissions'] )){ ## REVISAR
+                echo '<li>
+                  <a href="courses.php" class="nav-link text-left">';echo 'Courses</a>
+                  </li>
+';
+          }
+          echo'
                 <li>
-                  <a href="courses.php" class="nav-link text-left">Courses</a>
-                </li>
-                <li>
-                    <a href="contact.html" class="nav-link text-left">Contact</a>
+                    <a href="contact.php" class="nav-link text-left">Contact</a>
                   </li>
               </ul>                                                                                                                                                                                                                                                                                          </ul>
             </nav>
 
-          </div>
-          <div class="ml-auto">
-            <div class="social-wrap">
+          </div> 
+          <div class="ml-auto">';
+        if (isset($_SESSION['username'])){
+          echo ' <p> Hi '; print_r($_SESSION['username']);echo'!</p>';
+        }
+        echo '<div class="social-wrap">
               <a href="#"><span class="icon-facebook"></span></a>
               <a href="#"><span class="icon-twitter"></span></a>
               <a href="#"><span class="icon-linkedin"></span></a>
@@ -116,6 +132,7 @@ function head($title = ''){
 
 ';
 }
+
 
 
 function foot () {
