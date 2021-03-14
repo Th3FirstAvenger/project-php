@@ -16,7 +16,7 @@ head('Elearning')?>
 
     <div class="custom-breadcrumns border-bottom">
       <div class="container">
-        <a href="index.html">Home</a>
+        <a href="index.php">Home</a>
         <span class="mx-3 icon-keyboard_arrow_right"></span>
         <span class="current">Courses</span>
       </div>
@@ -80,11 +80,12 @@ head('Elearning')?>
                             <div class="course-1-content pb-4">
                             <h2>'.$row["assignatura"].'</h2>
                             <div class="rating text-center mb-3">
-                                <span class="icon-star2 text-warning"></span>
-                                <span class="icon-star2 text-warning"></span>
-                                <span class="icon-star2 text-warning"></span>
-                                <span class="icon-star2 text-warning"></span>
-                                <span class="icon-star2 text-warning"></span>
+';
+                              $star=rand(3,6);
+                              for ($i = 0; $i < $star; $i++){        
+                              echo ' <span class="icon-star2 text-warning"></span>';
+                              }
+        echo '
                             </div>
                             <p class="desc mb-4">'.$row["descripcio"].'</p>
                             <p><a href="course-single.html" class="btn btn-primary rounded-0 px-4">Enroll In This Course</a></p>

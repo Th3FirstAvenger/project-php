@@ -15,7 +15,7 @@ head('Contact')?>
 
     <div class="custom-breadcrumns border-bottom">
       <div class="container">
-        <a href="index.html">Home</a>
+        <a href="index.php">Home</a>
         <span class="mx-3 icon-keyboard_arrow_right"></span>
         <span class="current">Contact</span>
       </div>
