@@ -59,8 +59,9 @@ function head($title = ''){
 	  </div>
     <div class="col-lg-3 text-right">';
   if (isset($_SESSION['username'])){
-
-echo '<a href="logout.php" class="small mr-3"><span class="icon-unlock-alt"></span> log out</a>';
+    echo '
+    <a href="logout.php" class="small mr-3"><span class="icon-unlock-alt"></span> log out</a>
+	<a href="remove_user.php" class="small btn btn-primary px-4 py-2 rounded-0"><span class="icon-users"></span> Remove account</a>';
   } else {
     echo '
 	    <a href="login.php" class="small mr-3"><span class="icon-unlock-alt"></span> Log In</a>
@@ -116,7 +117,7 @@ echo '<a href="logout.php" class="small mr-3"><span class="icon-unlock-alt"></sp
           </div> 
           <div class="ml-auto">';
         if (isset($_SESSION['username'])){
-          echo ' <p> Hi '; print_r($_SESSION['username']);echo'!</p>';
+            echo ' <p> Hi '; print_r($_SESSION['username']);echo'!</p>';
         }
         echo '<div class="social-wrap">
               <a href="#"><span class="icon-facebook"></span></a>

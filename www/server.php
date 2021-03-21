@@ -98,4 +98,31 @@ if (isset($_GET['submit'])) {
     }
   $search_results = mysqli_query($db, $sql);
 
+
+// REMOVE USERS
+//
+if (isset($_POST['del_user'])) {
+  $username = mysqli_real_escape_string($db, $_POST['username']);
+  $password = mysqli_real_escape_string($db, $_POST['pword']);
+  
+  if (empty($username)) { array_push($errors, "Username or email required"); }
+  if (empty($password)) { array_push($errors, "Password required"); }
+
+  if (count($errors) == 0) {
+  	$password = md5($password);
+  	$query = "SELECT * FROM users WHERE (username='$username' OR email='$username') AND password='$password'";
+  	$results = mysqli_query($db, $query);
+    if (mysqli_num_rows($results) == 1) {
+      $que_perm = "DELETE FROM users WHERE username='$username' OR email='$username'";
+      $r_perm = mysqli_query($db, $que_perm);
+  	  $_SESSION['username'] = $username;
+  	  $_SESSION['success'] = "User deleted";
+      header('location: logout.php');
+  } else {
+    // If there is any error a JS code will append a new tag to the form to display the error
+	  echo sprintf("<script>alert('%s');</script>",$errors[0]);	
+  }
+  }
+}
 ?>
+

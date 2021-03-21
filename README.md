@@ -98,6 +98,47 @@ if (isset($_POST['login_user'])) {
   }
 }
 
+// Searching courses                                                                                                                                                                                                                                                                                                                                                                                
+if (isset($_GET['submit'])) {                                                                                                                                                               
+  if (!empty($_GET['search'])) {                                                                                                                                                                   
+    $search = mysqli_real_escape_string($db, $_GET['search']);                                                                                                                                       
+    $opt = $_GET['options'];                                                                                                                                                                         
+    if ($opt != "all"){                                                                                                                                                                            
+      $sql = "SELECT id, assignatura, categoria, preu, descripcio FROM classes where $opt like UPPER('$search')";                                                                                        
+    }else{                                                                                                                                                                                          
+      $sql = "SELECT id, assignatura, categoria, preu, descripcio FROM classes where assignatura like UPPER('$search') OR categoria like UPPER('$search') OR preu like UPPER('$search') OR descripcio like UPPER('%$search%')";                                                                                                                         
+    }                                                                                                                                                                                                
+  }                                                                                                                                                                                                  
+}else{                                                                                                                                                                                                   
+      $sql = "SELECT id, assignatura, categoria, preu, descripcio FROM classes";                                                                                                                          
+}                                                                                                                                                                                                          
+  $search_results = mysqli_query($db, $sql);
+
+// REMOVE USERS
+//
+if (isset($_POST['del_user'])) {
+  $username = mysqli_real_escape_string($db, $_POST['username']);
+  $password = mysqli_real_escape_string($db, $_POST['pword']);
+   
+  if (empty($username)) { array_push($errors, "Username or email required"); }
+  if (empty($password)) { array_push($errors, "Password required"); }
+
+  if (count($errors) == 0) {
+        $password = md5($password);
+        $query = "SELECT * FROM users WHERE (username='$username' OR email='$username') AND password='$password'";
+        $results = mysqli_query($db, $query);
+    if (mysqli_num_rows($results) == 1) {
+      $que_perm = "DELETE FROM users WHERE username='$username' OR email='$username'";
+      $r_perm = mysqli_query($db, $que_perm);
+          $_SESSION['username'] = $username;
+          $_SESSION['success'] = "User deleted";
+      header('location: logout.php');
+  } else {
+    // If there is any error a JS code will append a new tag to the form to display the error
+          echo sprintf("<script>alert('%s');</script>",$errors[0]);
+  }
+  }
+}
 ?>
 ```
 
@@ -115,6 +156,18 @@ function head($title = ''){
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
   ...
+```
+
+The last one we build the logout web page, that can remove sessions and change the structure of our web page. 
+
+```php
+<?php session_start();
+session_unset();
+session_destroy();
+
+header("location:login.php");
+exit();
+?>
 ```
 
 ## Database config
@@ -138,6 +191,8 @@ Tables:
 	| id       :key:| int         	|
 	| assignatura 	| varchar(50) 	|
 	| categoria   	| varchar(50) 	|
+    | descripcio    | varchar(500)  |
+    | preu          | float         |
 
 - Administradors
 
@@ -146,7 +201,6 @@ Tables:
 	| username :key:| varchar(20) 	|
 	| email    :key:| varchar(50) 	|
 	| password 	| varchar(32) 	|
-
 
 
 ## Forms
@@ -254,6 +308,46 @@ head('Register'); // Function put defaul header and assing title Register
 
 <?php foot();?>
 ```
+
+In the Delete users page we have configured the next code:
+
+It's really like the login form but in this case we deleting the specific username. We would like only access admin or other perms but we don't works the sessions permissions. 
+
+```php
+<?php include('server.php');                                                                                                                                                                              
+include('layout.php');                                                                                                                                                                                      
+head('Login');?>                                                                                                                                                                                     
+    
+    ...                                                                                                                                                                                                    
+    
+    <form method="post" action="remove_user.php">
+    <div class="site-section">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-5">
+                    <div class="row">
+                        <div class="col-md-12 form-group">
+                            <label for="username">Username or email</label>
+                            <input type="text" name="username" id="username" class="form-control form-control-lg">
+                        </div>
+                        <div class="col-md-12 form-group">
+                            <label for="pword">Password</label>
+                            <input type="password" id="pword" name="pword" class="form-control form-control-lg">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <button type="submit" value="log in" name="del_user" class="btn btn-primary btn-lg px-5">Delete</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </form>
+<?php foot();?>
+```
+
 
 
 ## Build this project 
