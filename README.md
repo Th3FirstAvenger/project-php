@@ -351,7 +351,7 @@ head('Login');?>
 
 In the searching page we have configured the next code:
 We can search for the database information
-```
+```php
 <!--start search-->
    <div class="s003">
       <form method="get" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
